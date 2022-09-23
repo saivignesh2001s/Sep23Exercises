@@ -1,21 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Sep23;
 namespace Sep23Exercises
 {
     internal class Program
     {
         static void Main(string[] args)
         {
-            List<product> po = new List<product>();
-            Class2 cq = new Class2();
-            po = cq.ShowProducts();
-            foreach (var item in po)
+            string connstring = @"Data Source=LAPTOP-566KJ7GJ\SQLEXPRESS;Initial Catalog=Northwind;Integrated Security=True";
+            SqlConnection conn = new SqlConnection(connstring);
+            SqlCommand sq = new SqlCommand("Select * from Products101", conn);
+            conn.Open();
+            SqlDataReader sl = sq.ExecuteReader();
+            while (sl.Read())
             {
-                Console.Write($"{item.ProductId},{item.Product_Name},{item.Unitcost},{item.Unitsonorders}\n");
+
+                Console.Write($"{sl["ProductID"]},{sl["ProductName"]},{sl["UnitPrice"]}\n");
             }
             Console.Read();
         }
