@@ -20,6 +20,7 @@ namespace Sep23Exercises
 
                 Console.Write($"{sl["ProductID"]},{sl["ProductName"]},{sl["UnitPrice"]}\n");
             }
+            conn.Close();
             Console.Read();
         }
     }
